@@ -1,0 +1,210 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    @*<meta name="viewport" content="width=device-width, initial-scale=1">*@
+    <style>
+        * {
+            box-sizing: border-box;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+        }
+
+        body {
+            font-family: Helvetica;
+            -webkit-font-smoothing: antialiased;
+            background: rgba( 71, 147, 227, 1);
+        }
+
+        h2 {
+            text-align: center;
+            font-size: 18px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #202122;
+            padding: 30px 0;
+        }
+
+        /* Table Styles */
+
+        .table-wrapper {
+            margin: 10px 100px 100px;
+            box-shadow: 0px 35px 50px rgba( 0, 0, 0, 0.2 );
+        }
+
+        .fl-table {
+            border-radius: 5px;
+            font-size: 12px;
+            font-weight: normal;
+            border-top-color: #4D4F50;
+            border-collapse: collapse;
+            width: 1000%;
+            max-width: 100%;
+            white-space: nowrap;
+            background-color: white;
+        }
+
+            .fl-table td, .fl-table th {
+                text-align: center;
+                padding: 15px;
+                /*border-left: 0.2px solid #f1eded;*/
+                border-bottom: 0.2px solid #f1eded;
+            }
+
+
+            .fl-table td {
+                font-size: 12px;
+                text-align: left;
+            }
+
+            .fl-table thead th {
+                color: #202122;
+                background: #4FC3A1;
+            }
+
+
+                .fl-table thead th:nth-child() {
+                    color: #ffffff;
+                    background: #4D4F50;
+                }
+
+            .fl-table tr:nth-child() {
+                background: #F8F8F8;
+            }
+
+        /* Responsive */
+
+        @@media (max-width: 750px) {
+            .fl-table {
+                display: block;
+                width: 100%;
+            }
+
+            .table-wrapper:before {
+                content: "Scroll horizontally >";
+                display: block;
+                text-align: right;
+                font-size: 11px;
+                color: white;
+                padding: 0 0 10px;
+            }
+
+            .fl-table thead, .fl-table tbody, .fl-table thead th {
+                display: block;
+            }
+
+                .fl-table thead th:last-child {
+                    border-bottom: none;
+                }
+
+            .fl-table thead {
+                float: left;
+            }
+
+            .fl-table tbody {
+                width: auto;
+                position: relative;
+                overflow-x: auto;
+            }
+
+            .fl-table td, .fl-table th {
+                padding: 20px .625em .625em .625em;
+                height: 60px;
+                vertical-align: middle;
+                box-sizing: border-box;
+                overflow-x: hidden;
+                overflow-y: auto;
+                width: 120px;
+                font-size: 13px;
+                text-overflow: ellipsis;
+            }
+
+            .fl-table thead th {
+                text-align: left;
+                border-bottom: 20px solid #A1A1A1;
+            }
+
+            .fl-table tbody tr {
+                display: table-cell;
+            }
+
+                .fl-table tbody tr:nth-child(odd) {
+                    background: none;
+                }
+
+            .fl-table tr:nth-child(even) {
+                background: transparent;
+            }
+
+            .fl-table tr td:nth-child(odd) {
+                background: #F8F8F8;
+                border-right: 15px solid rgba( 0, 0, 0, 0.2 );
+                text-align: left;
+            }
+
+            .fl-table tr td:nth-child(even) {
+                border-right: 15px solid rgba( 0, 0, 0, 0.2 );
+            }
+
+            .fl-table tbody td {
+                display: block;
+            }
+        }
+
+        .td3 {
+            color: red;
+        }
+
+        .fn {
+            color: white;
+        }
+
+        .logo {
+            text-align: center;
+        }
+
+        h3 {
+            padding-top: 30px;
+            padding-left: 100px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    @*<div class="logo">
+            <img src="/Files/m365.jpg" alt="m365" width="300" style="max-width:75%;height:auto;">
+        </div>*@
+    <div>
+        <h3 style="color: #202122">Welcome To M365 Demo for deploying on server</h3>
+    </div>
+
+    <div class="table-wrapper">
+        <table class="fl-table">
+            <thead>
+                <tr>
+                    <th style="background-color: #A1A1A1">File Name</th>
+                    <th style="background-color: #7AA4CD">Download File</th>
+                    <th style="background-color: #99B5D2">Delete</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (FileModel file in Model)
+                {
+                    <tr>
+                        <td style="color:#202122">@file.FileName</td>
+                        <td style="color:lightblue"><a href="/Home/DownloadFile?filename=@file.FileName">Download</a></td>
+                        <td><a class="td3" href="@Url.Action("Delete","Home",new { imgdel=file.FileName})">Delete</a></td>
+                    </tr>
+                }
+
+            <tbody>
+        </table>
+    </div>
+</body>
+</html>
+
